@@ -17,6 +17,7 @@ import com.constantcontact.util.Config;
 import com.constantcontact.util.ConstantContactExceptionFactory;
 import com.constantcontact.util.http.MultipartBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -237,23 +238,29 @@ public class BulkActivitiesService extends BaseService implements IBulkActivitie
 
 	public List<DetailedStatusReport> getDetailedStatusReport(String accessToken, String status, String type, String id) throws ConstantContactServiceException {
 
-		List<DetailedStatusReport> detailedStatusReports = null;
+		List<DetailedStatusReport> detailedStatusReports = new ArrayList<DetailedStatusReport>();
 
 		String url = Config.Endpoints.BASE_URL + Config.Endpoints.ACTIVITIES;
 		try {
-			if (status != null && status.length() > 0) {
-				url = appendParam(url, "status", status);
-			}
-			if (type != null && type.length() > 0) {
-				url = appendParam(url, "type", type);
-			}
 			if (id != null && id.length() > 0) {
-				url = appendParam(url, "id", id);
+				url += "/" + id;
+			} else {
+				if (status != null && status.length() > 0) {
+					url = appendParam(url, "status", status);
+				}
+				if (type != null && type.length() > 0) {
+					url = appendParam(url, "type", type);
+				}				
 			}
 
 			CUrlResponse response = getRestClient().get(url, accessToken);
 			if (response.hasData()) {
-				detailedStatusReports = Component.listFromJSON(response.getBody(), DetailedStatusReport.class);
+				if (id != null && id.length() > 0) {
+					DetailedStatusReport detailedStatusReport = Component.fromJSON(response.getBody(), DetailedStatusReport.class);
+					detailedStatusReports.add(detailedStatusReport);
+				} else { 
+					detailedStatusReports = Component.listFromJSON(response.getBody(), DetailedStatusReport.class);
+				}
 			}
 			if (response.isError()) {
                 throw ConstantContactExceptionFactory.createServiceException(response, url);
@@ -265,7 +272,7 @@ public class BulkActivitiesService extends BaseService implements IBulkActivitie
 		}
 		return detailedStatusReports;
 	}
-
+	
 	/**
 	 * Default constructor.
 	 */

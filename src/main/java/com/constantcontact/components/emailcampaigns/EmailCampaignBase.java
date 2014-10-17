@@ -78,6 +78,8 @@ public abstract class EmailCampaignBase extends Component implements Serializabl
 	@JsonIgnore
 	private List<SentToContactList> sentToContactLists;
 	@JsonIgnore
+	private List<ClickThroughDetails> clickThroughDetails;
+	@JsonIgnore
 	private String createdDate;
 	@JsonIgnore
 	private String permalinkUrl;
@@ -366,6 +368,26 @@ public abstract class EmailCampaignBase extends Component implements Serializabl
 		return sentToContactLists;
 	}
 
+	/**
+	 * Get click through details
+	 * 
+	 * @return
+	 */
+	@JsonProperty("click_through_details")
+	public List<ClickThroughDetails> getClickThroughDetails() {
+	    return clickThroughDetails;
+    }
+	
+	/**
+	 * Set click through details list 
+	 * 
+	 * @param clickThroughDetails
+	 */
+	public void setClickThroughDetails(
+            List<ClickThroughDetails> clickThroughDetails) {
+	    this.clickThroughDetails = clickThroughDetails;
+    }
+	
 	/**
 	 * Get the Created Date
 	 * 

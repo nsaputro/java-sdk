@@ -32,6 +32,8 @@ public class Address implements Serializable {
 	@JsonIgnore
 	private String stateCode;
 	@JsonIgnore
+	private String state;
+	@JsonIgnore
 	private String countryCode;
 	@JsonIgnore
 	private String postalCode;
@@ -170,6 +172,15 @@ public class Address implements Serializable {
 	 */
 	public void setStateCode(String stateCode) {
 		this.stateCode = stateCode;
+	}
+	
+	@JsonProperty("state")
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	/**

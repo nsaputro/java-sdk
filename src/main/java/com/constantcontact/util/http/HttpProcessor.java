@@ -171,7 +171,8 @@ public class HttpProcessor implements ProcessorBase {
 		//System.out.println("URL :" + urlParam);
 
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection.setReadTimeout(10000);
+		connection.setReadTimeout(1000 * 60 * 10); //10 minute
+		connection.setConnectTimeout(1000 * 60); //1 minute
 		connection.setUseCaches(false);
 
 		connection.setRequestProperty(CONTENT_TYPE_HEADER, contentType);
