@@ -48,10 +48,7 @@ public class DetailedStatusReport extends Component implements Serializable {
 	private int contactCount;
 
 	@JsonIgnore
-	private List<DetailedStatusReportError> errors;
-
-	@JsonIgnore
-	private List<DetailedStatusReportError> warnings;
+	private List<String> errors;
 
 	/**
 	 * Get the id
@@ -139,18 +136,8 @@ public class DetailedStatusReport extends Component implements Serializable {
 	 * @return The Errors
 	 */
 	@JsonProperty("errors")
-	public List<DetailedStatusReportError> getErrors() {
+	public List<String> getErrors() {
 		return errors;
-	}
-
-	/**
-	 * Get the Warnings
-	 * 
-	 * @return The Warnings
-	 */
-	@JsonProperty("warnings")
-	public List<DetailedStatusReportError> getWarnings() {
-		return warnings;
 	}
 
 	/**
@@ -185,17 +172,8 @@ public class DetailedStatusReport extends Component implements Serializable {
 	 * 
 	 * @param errors The new Errors
 	 */
-	public void setErrors(List<DetailedStatusReportError> errors) {
+	public void setErrors(List<String> errors) {
 		this.errors = errors;
-	}
-
-	/**
-	 * Set the Warnings
-	 * 
-	 * @param warnings The new Warnings
-	 */
-	public void setWarnings(List<DetailedStatusReportError> warnings) {
-		this.warnings = warnings;
 	}
 
 	/**
@@ -248,8 +226,7 @@ public class DetailedStatusReport extends Component implements Serializable {
 	 */
 	public DetailedStatusReport() {
 		super();
-		this.setErrors(new ArrayList<DetailedStatusReportError>());
-		this.setWarnings(new ArrayList<DetailedStatusReportError>());
+		this.setErrors(new ArrayList<String>());
 	}
 
 	/**
@@ -276,8 +253,6 @@ public class DetailedStatusReport extends Component implements Serializable {
 		builder.append(contactCount);
 		builder.append(", errors=");
 		builder.append(errors);
-		builder.append(", warnings=");
-		builder.append(warnings);
 		builder.append("]");
 		return builder.toString();
 	}
