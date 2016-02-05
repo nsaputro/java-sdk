@@ -92,6 +92,7 @@ public class Registrant extends Component implements Serializable {
      *
      * @return The {@link #id}
      */
+    @JsonProperty("id")
     public String getId() {
         return id;
     }
@@ -101,6 +102,7 @@ public class Registrant extends Component implements Serializable {
      *
      * @return The {@link #ticketId}
      */
+    @JsonProperty("ticket_id")
     public String getTicketId() {
         return ticketId;
     }
