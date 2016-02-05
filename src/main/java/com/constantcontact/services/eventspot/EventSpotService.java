@@ -12,6 +12,7 @@ import com.constantcontact.util.Config;
 import com.constantcontact.util.ConstantContactExceptionFactory;
 
 import java.net.HttpURLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -561,7 +562,7 @@ public class EventSpotService extends BaseService implements IEventSpotService {
         RegistrantDetails registrant = null;
         try {
             String url = String.format("%1$s%2$s", Config.Endpoints.BASE_URL,
-                    String.format(Config.Endpoints.EVENT_REGISTRANT_ID, eventId, registrantId));
+                    String.format(Config.Endpoints.EVENT_REGISTRANT_ID, eventId, URLEncoder.encode(registrantId, "UTF-8")));
 
             CUrlResponse response = getRestClient().get(url, accessToken);
 
